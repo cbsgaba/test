@@ -12,6 +12,13 @@
 
 2.4 Circular Hough Transform
 
+
+## Updates
+
+version 1.1 added main script, segmentation function first half (rgb2gray, imbinarized)
+
+version 1.2 added segmentation function second half (edge,cht)
+
 ## Authors
 
 - [@cbsgaba](https://github.com/cbsgaba)
