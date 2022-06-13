@@ -4,7 +4,11 @@ clear;
 workspace;
 %--------------------------------------------
 %image = imageacquisition();
-iris_image = imread('~/Documents/Github/git_workspace/test/MMU-Iris-Database/1/right')
+iris_image = imread('~/Documents/Github/git_workspace/test/MMU-Iris-Database/1/left/aeval1.bmp'  )
+iris_image = imread('~/Documents/Github/git_workspace/test/MMU-Iris-Database/1/left/aeval1.bmp'  )
 
-segmented_image = segmentation(iris_image)
+resized_image = imresize(iris_image,2.5)
+segmented_image = segmentation(resized_image)
+figure(2)
+segmented_image = segmentation(resized_image)
 
