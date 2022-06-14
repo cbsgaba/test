@@ -11,6 +11,7 @@ title('Gray image')
 %displays the binarized image
 binarized_image = imbinarize(gray_image,'adaptive','ForegroundPolarity','dark','Sensitivity',0.5)
 subplot(2,3,2), imshow(binarized_image, [])
+d= imdistline;
 title('Binarized image')
 
 %displays the canny edged image
@@ -20,7 +21,7 @@ title('Canny edge')
 
 %plots the outer area and inner area of the pupil
 % [outer_center,outer_radii] = imfindcircles(canny_img, [50,150],'Sensitivity',0.96)
-[outer_center,outer_radii] = imfindcircles(canny_img, [100,300],'Sensitivity',0.96)
+[outer_center,outer_radii] = imfindcircles(canny_img, [120 200],'Sensitivity',0.96, 'ObjectPolarity','bright')
 disp(outer_center)
 disp(outer_radii)
 outer_center_value = outer_center(:,:);
@@ -31,7 +32,7 @@ title('Outer circle')
 
 %plots the inner area of the pupil
 % [inner_center,inner_radii] = imfindcircles(canny_img, [10,40],'Sensitivity',0.8)
-[inner_center,inner_radii] = imfindcircles(canny_img, [60,100],'Sensitivity',0.96)
+[inner_center,inner_radii] = imfindcircles(canny_img, [50 70],'Sensitivity',0.96,'ObjectPolarity','bright')
 disp(inner_center)
 disp(inner_radii)
 inner_center_value = inner_center(:,:);
@@ -46,28 +47,11 @@ viscircles(inner_center_value,inner_radii_value,'Edgecolor','w')
 viscircles(outer_center_value,outer_radii_value,'Edgecolor','b')
 title('Outer and inner radius of iris')
 
-if inner_radii_value 
-segmented_image = 0
+if (outer_center_value ~= 0) & (outer_radii_value ~=0) & (inner_center_value ~= 0) & (inner_radii_value ~=0)
+    segmented_image = 1
+else
+    segmented_image = 0
 
-%---------------------------------------------- alternative
-% binarized_image = imbinarize(iris_image,'adaptive','ForegroundPolarity','dark','Sensitivity',0.5)
-% canny_img = edge3(binarized_image,"approxcanny",0.6)
-% morph_image = bwmorph3(canny_img,'clean')
-% subplot(2,2,1),image(iris_image)
-% title('graysca;e iris image')
-% subplot(2,2,2),image(binarized_image)
-% title('binarized image')
-% subplot(2,2,3),image(canny_img)
-% title('canny edge')
-%subplot(2,2,4),image(morph_image)
-%title('morph image')
-% [centers,radii] = imfindcircles(binarized_image,[20,150],'Sensitivity',0.8')
-% disp(centers)
-% disp(radii)
-% center = centers(:,:)
-% radii = radii(:)
-% subplot(2,2,4), image(iris_image)
-% % % viscircles(center,radii,'Edgecolor','b')
 
 end
 
