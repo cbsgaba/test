@@ -1,0 +1,17 @@
+06/18/22 
+-added iris normalization(half)
+notes:
+1. need to subtract the inner circle to outer circle
+2. arrays and stuff
+errors:
+1. subtraction of different sized arrays(incompatible arrays)
+
+
+
+
+
+
+
+
+ 
+
