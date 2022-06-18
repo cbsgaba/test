@@ -1,10 +1,10 @@
-function [outputArg1] = normalization(iris_image,inner_center,inner_radii,outer_center,outer_radii)
+function [normalized_image] = normalization(iris_image,inner_center,inner_radii,outer_center,outer_radii)
 %NORMALIZATION Summary of this function goes here
 %   Detailed explanation goes here
 
 [sz1 sz2 sz3]=size(iris_image) %returns a row vector whose elements are the lengths of the corresponding dimensions of iris image. 
-szx=sz1;
-szy=sz2;
+szx=sz2;
+szy=sz1;
 
 % figure(4); 
 % hold all;
@@ -14,8 +14,8 @@ szy=sz2;
 
 figure('Name','Iris Recognition: Normalization','Position', [800 1000 700 500]),image(iris_image)  
 hold all;
-Cx=floor(szx); Cy=floor(szy);
-plot(Cx,Cy,'co');
+Cx=floor(szx/2); Cy=floor(szy/2);
+subplot(2,3,1), plot(Cx,Cy,'co');
 
 % 
 % %------ outer ring
@@ -43,33 +43,44 @@ plot(hL1.XData,hL1.YData,'ro');
 
 % %--- inner ring
                                                                                
-% inner_radius=inner_radii+5;
-% 
-% perimeter_x=inner_radius*sind(t)+center_x;
-% perimeter_y=inner_radius*cosd(t)+center_y;                  % build outer perimeter
-% hL2=plot(perimeter_x,perimeter_y,'m'); % axis equal;grid on;  
-% hold all;
-% plot(hL2.XData,hL2.YData,'ro');
+inner_radius=inner_radii+5;
+
+perimeter_x=inner_radius*sind(theta)+center_x;
+perimeter_y=inner_radius*cosd(theta)+center_y;                  % build outer perimeter
+hL2=plot(perimeter_x,perimeter_y,'m'); % axis equal;grid on;  
+hold all;
+plot(hL2.XData,hL2.YData,'ro');
 
 outer_x_ref=hL1.XData;
 outer_y_ref=hL1.YData;
-% inner_x_ref=hL2.XData;
-% inner_y_ref=hL2.YData;
+inner_x_ref=hL2.XData;
+inner_y_ref=hL2.YData;
+
 hold all;
-% Sx=zeros(ceil(R),1);Sy=zeros(ceil(R),1);
+% outer_Sx=zeros(ceil(outer_radius),1);
+% outer_Sy=zeros(ceil(outer_radius),1);
 outer_Sx={};
 outer_Sy={};
-% 
-% inner_Sx={};
-% inner_Sy={};
+
+inner_Sx={};
+inner_Sy={};
+
+
 hold all;
 
 for k=1:1:numel(hL1.XData)
-    outer_Lx=floor(linspace(outer_x_ref(k),center_x,ceil(outer_radius)))
-    outer_Ly=floor(linspace(outer_y_ref(k),center_y,ceil(outer_radius)))
-    plot(outer_Lx,outer_Ly,'go');    % check
-    plot([center_x outer_perimeter_x(k)],[center_y outer_perimeter_y(k)],'r');
-%     outer_L1=unique([outer_Lx;outer_Ly]','rows');
+    outer_Lx=floor(linspace(outer_x_ref(k),inner_x_ref(k),ceil(outer_radius)))
+    outer_Ly=floor(linspace(outer_y_ref(k),inner_y_ref(k),ceil(outer_radius)))
+%     
+%    inner_Lx=floor(linspace(inner_x_ref(k),center_x,ceil(inner_radius)))
+%    inner_Ly=floor(linspace(inner_y_ref(k),center_y,ceil(inner_radius)))
+    
+    plot(outer_Lx,outer_Ly,'go');    % check 
+%    plot(inner_Lx,inner_Ly,'b')
+%    plot([inner_Lx outer_Lx], [inner_Ly outer_Ly],'go')
+    plot([perimeter_x(k) outer_perimeter_x(k)],[perimeter_y(k) outer_perimeter_y(k)],'r');
+%   outer_L1=unique([outer_Lx;outer_Ly]','rows');
+    
     outer_Sx=[outer_Sx outer_Ly'];
     outer_Sy=[outer_Sy outer_Lx'];
 end
@@ -113,7 +124,6 @@ C(:,:,2)=B2;
 C(:,:,3)=B3;
 figure('Name','Iris Recognition: Normalization','Position',[0 0 700 500])
 imshow(C);
-
 x=0
 
 end

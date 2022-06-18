@@ -1,4 +1,4 @@
-function [outputArg1] = normalization(iris_image,inner_center,inner_radii,outer_center,outer_radii)
+function [normalized_image] = normalization(iris_image,inner_center,inner_radii,outer_center,outer_radii)
 %NORMALIZATION Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -7,12 +7,8 @@ szx=sz2;
 szy=sz1;
 
 % figure(4); 
-% hold all;
-% subplot(2,3,1),imshow(iris_image)
-% Cx=floor(szx/2); Cy=floor(szy/2);
-% subplot(2,3,1),plot(Cx,Cy,'co');
 
-figure('Name','Iris Recognition: Normalization','Position', [800 1000 700 500]),image(iris_image)  
+figure('Name','Iris Recognition: Normalization process','Position', [800 1000 700 500]),image(iris_image)
 hold all;
 Cx=floor(szx/2); Cy=floor(szy/2);
 plot(Cx,Cy,'co');
@@ -26,11 +22,15 @@ length = floor(x)
 center_x = floor((outer_center(1)+inner_center(1))*.5)
 center_y = floor((outer_center(2)+inner_center(2))*.5)
  
+% hold all;
+% subplot(2,3,1),imshow(iris_image)
+% Cx=floor(szx/2); Cy=floor(szy/2);
+% subplot(2,3,1),plot(Cx,Cy,'co');
 
 plot(center_x,center_y,'r*');                                                        % check avg centre circle is not aligned to figure centre
 plot([center_x 1],[center_y 1],'r-.');
 
-theta=[45:360/length:404+1-360/length];                                                       % if step=1 then we only get 360 points but need an amount of L points
+theta=[45:360/length:404+1-360/length];                                         % if step=1 then we only get 360 points but need an amount of L points
                                                                                 % if angle step 1/L over minute waiting for for loop to finish
 outer_radius=outer_radii+5;
 
@@ -117,15 +117,12 @@ for n=1:1:s2
         B3(k,n)=iris_image(sx(k,n),sy(k,n)); 
     end
 end
-
+figure('Name','Iris Recognition: Normalization','Position', [0 0 700 500]),
 C=uint8(zeros(s1,s2,3));
 C(:,:,1)=B1;
 C(:,:,2)=B2;
 C(:,:,3)=B3;
-figure('Name','Iris Recognition: Normalization','Position',[0 0 700 500])
-imshow(C);
-
-x=0
-
+normalized_image = C
+imshow(normalized_image)
 end
 
