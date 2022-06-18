@@ -1,4 +1,4 @@
-function [segmented_image]= segmentation(iris_image)
+function [gray_image,inner_center,inner_radii,outer_center,outer_radii]= segmentation(iris_image)
 %binarization (converting grey scale image into black and white)
 
 
@@ -9,14 +9,13 @@ subplot(2,3,1), imshow(gray_image, [])
 title('Gray image')
 
 %displays the binarized image
-binarized_image = imbinarize(gray_image,'adaptive','ForegroundPolarity','dark','Sensitivity',0.5)
-subplot(2,3,2), imshow(binarized_image, [])
-d = imdistline
+binarized_image = imbinarize(gray_image,'adaptive','ForegroundPolarity','dark','Sensitivity',0.45)
+subplot(2,3,2), imshow(binarized_image,[])
 title('Binarized image')
 
 %displays the canny edged image
 canny_img = edge(binarized_image, 'canny')
-subplot(2,3,3), imshow(canny_img,[])
+subplot(2,3,3), imshow(canny_img, [])
 title('Canny edge')
 
 %plots the outer area and inner area of the pupil
@@ -44,14 +43,13 @@ title('Inner circle')
 %plots both
 subplot(2,3,6), imshow(iris_image, [])
 viscircles(inner_center_value,inner_radii_value,'Edgecolor','w')
-viscircles(outer_center_value,outer_radii_value,'Edgecolor','b')
+viscircles(outer_center_value,outer_radii_value,'Edgecolor','w')
 title('Outer and inner radius of iris')
 
 if (outer_center_value ~= 0) & (outer_radii_value ~=0) & (inner_center_value ~= 0) & (inner_radii_value ~=0)
     segmented_image = 1
 else
     segmented_image = 0
-
 
 end
 
