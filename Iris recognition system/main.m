@@ -5,7 +5,7 @@ workspace;
 %--------------------------------------------
 %image = imageacquisition();
 iris_image = imread('~/Documents/Github/git_workspace/test/MMU-Iris-Database/1/left/aeval1.bmp')
-figure('Name','Iris Segmentation: Left eye','Position',[800 1000 700 500])
+figure('Name','Iris Segmentation: Left eye','Position',[0 1000 700 500])
 resized_image = imresize(iris_image,2.5)
 [gray_image,inner_center,inner_radii,outer_center,outer_radii] = segmentation(resized_image)
 

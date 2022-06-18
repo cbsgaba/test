@@ -39,13 +39,13 @@ inner_radii_value = inner_radii(:);
 subplot(2,3,5), imshow(canny_img, [])
 viscircles(inner_center_value,inner_radii_value,'Edgecolor','w')
 title('Inner circle')
-
+hold all;
 %plots both
 subplot(2,3,6), imshow(iris_image, [])
 viscircles(inner_center_value,inner_radii_value,'Edgecolor','w')
 viscircles(outer_center_value,outer_radii_value,'Edgecolor','w')
 title('Outer and inner radius of iris')
-
+hold all;
 if (outer_center_value ~= 0) & (outer_radii_value ~=0) & (inner_center_value ~= 0) & (inner_radii_value ~=0)
     segmented_image = 1
 else
