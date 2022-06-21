@@ -18,16 +18,6 @@ canny_img = edge(binarized_image, 'canny')
 subplot(2,3,3), imshow(canny_img, [])
 title('Canny edge')
 
-%plots the outer area and inner area of the pupil
-% [outer_center,outer_radii] = imfindcircles(canny_img, [50,150],'Sensitivity',0.96)
-[outer_center,outer_radii] = imfindcircles(canny_img, [100 300],'Sensitivity',0.96, 'ObjectPolarity','bright')
-disp(outer_center)
-disp(outer_radii)
-outer_center_value = outer_center(:,:);
-outer_radii_value = outer_radii(:);
-subplot(2,3,4), imshow(canny_img, [])
-viscircles(outer_center_value,outer_radii_value,'Edgecolor','b')
-title('Outer circle')
 
 %plots the inner area of the pupil
 % [inner_center,inner_radii] = imfindcircles(canny_img, [10,40],'Sensitivity',0.8)
@@ -36,21 +26,34 @@ disp(inner_center)
 disp(inner_radii)
 inner_center_value = inner_center(:,:);
 inner_radii_value = inner_radii(:);
-subplot(2,3,5), imshow(canny_img, [])
+subplot(2,3,4), imshow(canny_img, [])
 viscircles(inner_center_value,inner_radii_value,'Edgecolor','w')
-title('Inner circle')
+title('Inner boundary')
 hold all;
+
+%plots the outer area and inner area of the pupil
+% [outer_center,outer_radii] = imfindcircles(canny_img, [50,150],'Sensitivity',0.96)
+[outer_center,outer_radii] = imfindcircles(canny_img, [100 300],'Sensitivity',0.96, 'ObjectPolarity','bright')
+disp(outer_center)
+disp(outer_radii)
+outer_center_value = outer_center(:,:);
+outer_radii_value = outer_radii(:);
+subplot(2,3,5), imshow(canny_img, [])
+viscircles(outer_center_value,outer_radii_value,'Edgecolor','b')
+title('Outer boundary')
+
 %plots both
 subplot(2,3,6), imshow(iris_image, [])
 viscircles(inner_center_value,inner_radii_value,'Edgecolor','w')
 viscircles(outer_center_value,outer_radii_value,'Edgecolor','w')
-title('Outer and inner radius of iris')
+title('Outer and inner boundary of iris')
 hold all;
+
+
 if (outer_center_value ~= 0) & (outer_radii_value ~=0) & (inner_center_value ~= 0) & (inner_radii_value ~=0)
     segmented_image = 1
 else
     segmented_image = 0
-
 end
 
 %

@@ -6,5 +6,7 @@ function [outputArg1] = feature_extraction(normalized_image)
 figure('Name', 'Iris Recognition: Feature Extraction: histogram')
 imhist(normalized_image)
 
+title('morlet wavelet') 
+
 end
 
