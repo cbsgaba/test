@@ -21,6 +21,8 @@ version 1.2 added segmentation function second half (edge,cht)
 
 version 1.3 added normalization
 
+version 1.4 added feature extraction
+
 ## Authors
 
 - [@cbsgaba](https://github.com/cbsgaba)
