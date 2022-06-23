@@ -1,4 +1,4 @@
-function createfigure(cdata1, cdata2, cdata3, cdata4, cdata5)
+function morletwavelet(cdata1, cdata2, cdata3, cdata4, cdata5)
 %CREATEFIGURE(cdata1, cdata2, cdata3, cdata4, cdata5)
 %  CDATA1:  image cdata
 %  CDATA2:  image cdata

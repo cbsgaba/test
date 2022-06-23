@@ -13,7 +13,8 @@ subplot(2,2,1),imshow(cropped_normalized_image)
 title('Cropped Iris Image')
 subplot(2,2,2),imhist(cropped_normalized_image)
 
+scale = 2.^(0:6)
 figure('Name','Iris Feature Extraction: Morlet scales')
-image_scale2 = cwtft2(cropped_normalized_image,'wavelet','morl','scales',1:10,'plot')
+image_scale2 = cwtft2(cropped_normalized_image,'wavelet','morl','scales',scale,'plot')
 end
 

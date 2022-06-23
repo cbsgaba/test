@@ -27,7 +27,7 @@ figure('Name','Iris Normalization: Left eye','Position',[0 50 700 400]);
 %-- feature extraction call function
 figure('Name','Iris Feature Extraction: Left eye','Position',[800 1000 700 400]);
 [cropped_normalized_image,image_scale] = feature_extraction(normalized_image)
-
+A = image_scale
 % feature_extraction(normalized_image2)
 %--------
 % use d=imdistline to approximate circles (a draggable line)
