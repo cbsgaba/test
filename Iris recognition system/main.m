@@ -19,13 +19,15 @@ resized_image = imresize(iris_image,2.5)
 
 %-- normalization call function
 figure('Name','Iris Normalization: Left eye','Position',[0 50 700 400]);
-normalized_image = normalization(resized_image,inner_center,inner_radii,outer_center,outer_radii)
+[normalized_image] = normalization(resized_image,inner_center,inner_radii,outer_center,outer_radii)
 
 % figure('Name','Iris Normalization: Left eye 2','Position',[0 150 700 400]);
 % normalized_image2 = normalization(resized_image2,inner_center2,inner_radii2,outer_center2,outer_radii2)
 
 %-- feature extraction call function
-feature_extraction(normalized_image)
+figure('Name','Iris Feature Extraction: Left eye','Position',[800 1000 700 400]);
+[cropped_normalized_image,image_scale] = feature_extraction(normalized_image)
+
 % feature_extraction(normalized_image2)
 %--------
 % use d=imdistline to approximate circles (a draggable line)

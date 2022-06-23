@@ -8,7 +8,8 @@ szy=sz1;
 
 % figure(4); 
 
-subplot(2,2,1),image(iris_image)
+subplot(1,2,1),image(iris_image)
+title('Inner and Outer Boundary')
 hold all;
 Cx=floor(szx/2); Cy=floor(szy/2);
 plot(Cx,Cy,'co');
@@ -96,7 +97,7 @@ end
 sy=cell2mat(outer_Sx)
 sx=cell2mat(outer_Sy)
 
-plot(sx,sy,'b')
+plot(sy,sx,'b')
 % outer_sx=cell2mat(outer_Sx);outer_sy=cell2mat(outer_Sy);
 % inner_sx=cell2mat(inner_Sx);inner_sy=cell2mat(inner_Sy);
 
@@ -122,7 +123,12 @@ C(:,:)=B1;
 % C(:,:,2)=B2;
 % C(:,:,3)=B3;
 normalized_image = C
-subplot(2,2,4),imshow(normalized_image)
+subplot(1,2,2),imshow(normalized_image)
+title('Normalized Iris Image')
+
+
+
+d = imdistline
 end
 
     
